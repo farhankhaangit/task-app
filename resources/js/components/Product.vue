@@ -12,7 +12,7 @@
             <Rating :rating="pro.rating" />
         </div>
         <div class="text-center mt-2">
-            <button class="btn btn-sm btn-primary mx-2">Add To Cart</button>
+            <button class="btn btn-sm btn-primary mx-2">Details</button>
             <button class="btn btn-sm btn-dark mx-2">Buy</button>
         </div>
     </div>
