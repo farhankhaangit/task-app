@@ -1,21 +1,22 @@
 <template>
-    <div class="container">
     <Filters v-if="filters.visible" :categories="filters.categories" :brands="filters.brands" :prefill="filters.prefills"/>
+    <ProductDetail v-if="productDetail.visible" :product="productDetail.product"/>
+    <div class="container">
         <h1 class="mt-5 text-center">Ecommerce Website</h1>
         <div class="mt-5 product-box">
             <div class="products-header bg-dark py-3 px-3">
                 <div class="row text-white">
-                    <h4 class="m-0 col-12 col-md-6 col-lg-8">Available Products</h4>
-                    <div class="d-flex justify-content-between col-12 col-md-6 col-lg-4">
+                    <h4 class="m-0 col-12 col-md-6 col-lg-7">Available Products</h4>
+                    <div class="d-flex justify-content-end col-12 col-md-6 col-lg-5">
                         <div class="d-flex">
-                            <span class="me-4">Sort By:</span>
+                            <span class="me-3">Sort By:</span>
                             <select @change="sortData()" v-model="sortBy" class="py-1 px-2 border-0" style="width: 180px;">
-                                <option value="">-- select --</option>
+                                <option value="">Default</option>
                                 <option value="name_asc">Name</option>
                                 <option value="name_dsc">Name (desc)</option>
                                 <option value="price_asc">Price</option>
                                 <option value="price_dsc">Price (desc)</option>
-                                <option value="rating_asc">Rating</option>
+                                <option value="rating_asc">Rating</option>s
                                 <option value="rating_dsc">Rating (desc)</option>
                             </select>
                         </div>
@@ -39,8 +40,9 @@
 import axios from 'axios';
 import Product from '../components/Product.vue';
 import Filters from '../components/Filters.vue';
+import ProductDetail from '../components/product-detail.vue'
 export default {
-    components: {Product,Filters},
+    components: {Product,Filters,ProductDetail},
     data() {
         return {
             products: [],
@@ -59,6 +61,10 @@ export default {
                         "max" : null
                     },
                 }
+            },
+            productDetail: {
+                visible: false,
+                product: null
             }
         }
     },
@@ -167,6 +173,10 @@ export default {
             this.visibleProducts = this.products;
             if(this.sortBy!=="")
             this.sortData();
+        },
+        openProductDetail(prod){
+            this.productDetail.product = prod;
+            this.productDetail.visible = true;
         }
     },
 }

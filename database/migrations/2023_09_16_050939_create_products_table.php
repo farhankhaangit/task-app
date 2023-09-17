@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('image');
             $table->float('price');
             $table->integer('rating')->default(0);
+            $table->integer('stock');
             $table->text('description');
             $table->timestamps();
         });
